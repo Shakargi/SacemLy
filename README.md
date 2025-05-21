@@ -132,7 +132,7 @@ This project is licensed under the MIT License. You are free to use, modify, and
 
 For inquiries, collaboration opportunities, or additional information, please contact:
 
-**Email**: [your\_email@example.com](mailto:avrahamsh124@gmail.com)
+**Email**: [avrahamsh124@gmail.com](mailto:avrahamsh124@gmail.com)
 **Project Website (planned)**: [https://sacemly.ai](https://sacemly.ai)
 
 ---
