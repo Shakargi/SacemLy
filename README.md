@@ -1,4 +1,4 @@
-# Sacemly – Intelligent Summarization System for Students and Learners
+# Sacemly – Intelligent Learning System for Independent Students
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 
 ## Overview
 
-**Sacemly** is an AI-powered summarization system designed to support students and independent learners by transforming lengthy and complex texts into concise, personalized summaries. The system focuses on preserving the learner’s unique writing style, highlighting key information, and providing a clear and effective learning aid that adapts over time.
+**Sacemly** is an AI-powered learning support system designed to assist students and independent learners by transforming educational content into structured, efficient, and personalized study tools. While intelligent summarization remains a core feature, Sacemly aims to be a complete self-learning assistant by offering a comprehensive suite of tools for academic understanding and mastery.
 
 The project is built entirely from the ground up, without relying on pre-trained language models. All core algorithms—such as word embeddings, context modeling, and importance ranking—are implemented manually to ensure a deep understanding of the underlying mechanisms.
 
@@ -25,12 +25,13 @@ The project is built entirely from the ground up, without relying on pre-trained
 
 ## Project Purpose
 
-The primary goal of Sacemly is to enhance the way learners interact with educational content by offering a streamlined, intelligent summarization tool. It aims to:
+The primary goal of Sacemly is to empower learners to take full control of their educational journey through smart automation and personalization. It aims to:
 
+* Provide all essential tools for effective self-learning.
 * Reduce cognitive load during reading and review.
-* Deliver summaries that reflect the user's personal writing style.
-* Highlight the most critical information within the content.
-* Enable more effective and personalized study workflows.
+* Deliver summaries and structured insights in the user's personal writing style.
+* Highlight the most critical information within content.
+* Enable more effective and customized study workflows.
 
 This project is part of a larger initiative to develop AI solutions that are transparent, customizable, and educational by design.
 
@@ -38,6 +39,7 @@ This project is part of a larger initiative to develop AI solutions that are tra
 
 ## Key Features
 
+* **Comprehensive Self-Learning Toolkit**: Beyond summarization, Sacemly provides contextual insights, style mimicry, and study-friendly formatting.
 * **Personalized Summarization**: The system adapts to the user’s writing patterns to produce summaries in a familiar and natural tone.
 * **Importance-Weighted Analysis**: Each part of the text is evaluated and scored based on its semantic importance, ensuring that essential ideas are emphasized.
 * **Style Preservation**: The system preserves the user’s voice, vocabulary, and phrasing throughout the summarization process.
@@ -68,7 +70,7 @@ The system operates in the following stages:
 2. **Preprocessing**: Text is cleaned, segmented, and normalized for analysis.
 3. **Style Learning**: The system identifies unique stylistic patterns from the user's existing content.
 4. **Importance Detection**: Using manually implemented NLP algorithms, the system scores and ranks textual segments.
-5. **Summary Generation**: A custom summary is generated, preserving both style and substance.
+5. **Summary Generation and Study Support**: A custom summary is generated alongside suggestions and tools to enhance self-study.
 
 ---
 
@@ -130,7 +132,7 @@ This project is licensed under the MIT License. You are free to use, modify, and
 
 For inquiries, collaboration opportunities, or additional information, please contact:
 
-**Email**: [your\_email@example.com](mailto:your_email@example.com)
+**Email**: [your\_email@example.com](mailto:avrahamsh124@gmail.com)
 **Project Website (planned)**: [https://sacemly.ai](https://sacemly.ai)
 
 ---
