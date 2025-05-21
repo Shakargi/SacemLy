@@ -81,8 +81,8 @@ The system operates in the following stages:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/sacemly.git
-cd sacemly
+git clone https://github.com/Shakargi/Sacemly.git
+cd Sacemly
 ```
 
 ### Install Dependencies
