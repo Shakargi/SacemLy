@@ -45,14 +45,14 @@ def fit(data, iterations = 3000, alpha = 0.1):
     for i in range(iterations):
         for x, y in data:
             yhat = forward(x, embeddingMatrix, Wout, b)
-            if (i + 1) % 300 == 0:
-                print(f"loss iteration {i+1}: {lossFunctionCCE(y, yhat)}")
 
             dembeddingMatrix, dWout, db = backprop(yhat, y, x, embeddingMatrix, Wout)
 
             embeddingMatrix -= alpha * dembeddingMatrix
             Wout -= alpha * dWout
-            b -= alpha *db
+            b -= alpha * db
+        if (i + 1) % 300 == 0:
+            print(f"loss iteration {i+1}: {lossFunctionCCE(y, yhat)}")
     return embeddingMatrix, Wout, b
 
 
