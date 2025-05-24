@@ -1,6 +1,5 @@
 import numpy as np
 
-words = ["I", "like", "to", "eat", "pizza", "with", "cheese", "and", "tomato"]
 
 def buildVocab(words):
     uniqueWords = sorted(set(words))
@@ -11,8 +10,7 @@ def buildReverseVocab(words):
     return {i: Word for i, Word in enumerate(uniqueWords)}
 
 
-vocab = buildVocab(words)
-reverseVocab = buildReverseVocab(words)
+
 
 def generatePairs(words, windowSize = 2):
     data = []
@@ -47,4 +45,3 @@ def prepareData(vocab, pairs):
         data.append((onehot, oneHotEncoder(vocab, target)))
 
     return data
-
