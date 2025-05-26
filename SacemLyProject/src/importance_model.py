@@ -1,6 +1,6 @@
 import numpy as np
-from cbow_model import fit
-from preprocessing import clean_and_tockenize
+from src.cbow_model import fit
+from src.preprocessing import clean_and_tockenize
 import re
 
 def buildVocab(words):
@@ -113,6 +113,9 @@ def extract_features(text, embeddingMatrix, vocab, keywords, title=""):
     lengths = [compute_length_score(len(tokensPerSentences[i]), maxLength) for i in range(len(sentences))]
     keywordsPrecent = [compute_keyword_density(tokensPerSentences[i], keywords) for i in range(len(sentences))]
     similarities = [compute_similarity_to_title(vectors[i], titleVector) for i in range(len(sentences))]
+    importanceScore = rankSentences(vectors)
+
+
     featuresPerSentenceDS = []
     for i in range(len(sentences)):
         sentenceFeatures = {"text" : sentences[i],
@@ -120,10 +123,51 @@ def extract_features(text, embeddingMatrix, vocab, keywords, title=""):
                             "positionScore" : positions[i],
                             "lengthScore" : lengths[i],
                             "keywordDensity" : keywordsPrecent[i],
-                            "similarityToTitle" : similarities[i]}
+                            "similarityToTitle" : similarities[i],
+                            "importanceScore" : importanceScore[i]}
 
 
         featuresPerSentenceDS.append(sentenceFeatures)
 
     return featuresPerSentenceDS
+
+
+def build_similarity_matrix(sentenceVectors):
+    similarityMatrix = np.zeros((len(sentenceVectors), len(sentenceVectors)))
+    for i in range(len(sentenceVectors)):
+        for j in range(len(sentenceVectors)):
+            if i != j:
+                similarityMatrix[i][j] = compute_similarity_to_title(sentenceVectors[i], sentenceVectors[j])
+
+
+    return similarityMatrix
+
+
+def rankSentences(sentenceVectors, eps=1e-6, d=0.85, maxIter=1000):
+    similarityMatrix = build_similarity_matrix(sentenceVectors)
+    N = len(similarityMatrix)
+    rank = np.ones(N)
+    weight_sums = np.sum(similarityMatrix, axis=1)
+
+    for iteration in range(maxIter):
+        new_rank = np.ones(N) * (1 - d)
+        for i in range(N):
+            for j in range(N):
+                if similarityMatrix[j][i] > 0 and weight_sums[j] > 0:
+                    new_rank[i] += d * (similarityMatrix[j][i] / weight_sums[j]) * rank[j]
+
+        if np.linalg.norm(rank - new_rank) < eps:
+            break
+
+        rank = new_rank
+
+    return rank
+
+
+
+
+
+
+
+
 
