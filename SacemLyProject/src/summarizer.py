@@ -1,12 +1,13 @@
 import numpy as np
-
+import LSA_keywords as lsa
 import importance_model as im
 import preprocessing as pre
 
-def summerizer(text, title, keyWords, embeddingMatrix, precentSummerization=0.3):
+def summerizer(text, title, embeddingMatrix, precentSummerization=0.3):
     words = pre.clean_and_tockenize(text)
     vocab = im.buildVocab(words)
     sentences = im.sentencesSplitter(text)
+    keyWords = lsa.keywords(sentences)
     features = im.extract_features(text, embeddingMatrix, vocab, keyWords, title)
     ranking = [featureOfsentence["importanceScore"] for featureOfsentence in features]
     numSentences = int(np.round(len(ranking) * precentSummerization))
@@ -21,8 +22,6 @@ def summerizer(text, title, keyWords, embeddingMatrix, precentSummerization=0.3)
 
     for sentence in summerizedSentences:
         print(sentence)
-
-
 
 
 
