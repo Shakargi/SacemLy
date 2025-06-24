@@ -60,4 +60,3 @@ def fit(data, iterations = 3000, alpha = 0.1):
 
 
 
-
