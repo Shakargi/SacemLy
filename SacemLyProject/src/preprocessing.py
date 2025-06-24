@@ -22,6 +22,3 @@ def clean_and_tockenize(text):
     # return np.array(cleanedFinal)
 
     return np.array(cleanedText)
-
-
-
