@@ -99,7 +99,7 @@ def compute_similarity_to_title(sentenceVector, titleVector):
 def extract_features(text, embeddingMatrix, vocab, keywords, title=""):
     titleVector = Sentences2Vectors([title], vocab, embeddingMatrix)
     if len(titleVector) == 0:
-        titleVector = np.zeros(embeddingMatrix.shape[1])  # וקטור אפס אם הכותרת ריקה או לא נמצאה
+        titleVector = np.zeros(embeddingMatrix.shape[1])
     else:
         titleVector = titleVector[0]
 
