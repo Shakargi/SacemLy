@@ -4,7 +4,7 @@ import sklearn.feature_extraction.text as text
 def buildTFIDFMatrix(documents):
     if not any(doc.strip() for doc in documents):
         return None, None
-    vectorizer = text.TfidfVectorizer()
+    vectorizer = text.TfidfVectorizer(stop_words='english')
     try:
         tfIdfMatrix = vectorizer.fit_transform(documents)
         return vectorizer, tfIdfMatrix
@@ -12,7 +12,7 @@ def buildTFIDFMatrix(documents):
         return None, None
 
 
-def keywords(documents, wordsPerTopic = 5, numTopics = 2):
+def keywords(documents, wordsPerTopic = 2, numTopics = 4):
     keyWords = set()
     vectorizer, tfIdfMatrix = buildTFIDFMatrix(documents)
 
