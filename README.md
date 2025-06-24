@@ -115,8 +115,8 @@ As of 2025, Sacemly is in active development. The following milestones have been
 
 * [x] Completion of theoretical and algorithmic groundwork
 * [x] Manual implementation of Word2Vec and CBOW
-* [ ] Importance analysis and content ranking
-* [ ] Style recognition and imitation module
+* [x] Importance analysis and content ranking
+* [x] Style recognition and imitation module (currently under development)
 * [ ] PDF and social content ingestion
 * [ ] Full user interface and frontend integration
 
