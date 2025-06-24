@@ -1,11 +1,5 @@
 {
-    "style_vector": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
+    "TextStyleVector": [
         0,
         0,
         0,
@@ -16,5 +10,14 @@
         0,
         0
     ],
-    "samples": 0
+    "SentenceStyleVector": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "texts": 0,
+    "sentences": 0
 }
