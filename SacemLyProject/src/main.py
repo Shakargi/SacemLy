@@ -7,6 +7,10 @@ from cbow_model import *
 # tokens = clean_and_tockenize(text)
 # print(tokens)
 
+
+
+
+
 # text = "The cat sat on the mat and looked at the dog. The dog barked loudly, but the cat did not move. Both animals stayed in the room until dinner time."
 # words = clean_and_tockenize(text)
 # vocab = buildVocab(words)
