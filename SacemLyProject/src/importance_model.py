@@ -56,19 +56,24 @@ def sentencesSplitter(text):
 
 def Sentences2Vectors(sentences, vocab, embeddingMatrix):
     vectors = []
-    for sentence in sentences:
+    validIndices = []
+    for idx, sentence in enumerate(sentences):
         words = clean_and_tockenize(sentence)
-
         filtered_words = [w for w in words if w in vocab]
         if not filtered_words:
             continue
 
-        word_vectors = [embeddingMatrix[vocab[word]] for word in filtered_words]
+
+        word_vectors = [embeddingMatrix[vocab[word]] for word in filtered_words if word in vocab]
+
+
         sentenceVector = np.mean(word_vectors, axis=0)
         vectors.append(sentenceVector)
+        validIndices.append(idx)
 
 
-    return vectors
+
+    return vectors, validIndices
 
 
 
@@ -97,7 +102,8 @@ def compute_similarity_to_title(sentenceVector, titleVector):
 
 
 def extract_features(text, embeddingMatrix, vocab, keywords, title=""):
-    titleVector = Sentences2Vectors([title], vocab, embeddingMatrix)
+
+    titleVector, _ = Sentences2Vectors([title], vocab, embeddingMatrix)
     if len(titleVector) == 0:
         titleVector = np.zeros(embeddingMatrix.shape[1])
     else:
@@ -105,20 +111,28 @@ def extract_features(text, embeddingMatrix, vocab, keywords, title=""):
 
 
     sentences = sentencesSplitter(text)
-    vectors = Sentences2Vectors(sentences, vocab, embeddingMatrix)
-    tokensPerSentences = [clean_and_tockenize(sentence) for sentence in sentences]
-    maxLength = np.max([len(tokensPerSentences[i]) for i in range(len(sentences))])
 
-    positions = [compute_position_score(i, len(sentences)) for i in range(len(sentences))]
-    lengths = [compute_length_score(len(tokensPerSentences[i]), maxLength) for i in range(len(sentences))]
-    keywordsPrecent = [compute_keyword_density(tokensPerSentences[i], keywords) for i in range(len(sentences))]
-    similarities = [compute_similarity_to_title(vectors[i], titleVector) for i in range(len(sentences))]
+
+    vectors, validIndices = Sentences2Vectors(sentences, vocab, embeddingMatrix)
+
+    if len(vectors) < len(sentences):
+        return []
+
+    tokensPerSentences = [clean_and_tockenize(sentence) for sentence in sentences]
+    validSentences = [sentences[i] for i in validIndices]
+
+    maxLength = np.max([len(tokensPerSentences[i]) for i in range(len(validSentences))])
+
+    positions = [compute_position_score(i, len(sentences)) for i in range(len(validSentences))]
+    lengths = [compute_length_score(len(tokensPerSentences[i]), maxLength) for i in range(len(validSentences))]
+    keywordsPrecent = [compute_keyword_density(tokensPerSentences[i], keywords) for i in range(len(validSentences))]
+    similarities = [compute_similarity_to_title(vectors[i], titleVector) for i in range(len(validSentences))]
     importanceScore = rankSentences(vectors)
 
 
     featuresPerSentenceDS = []
-    for i in range(len(sentences)):
-        sentenceFeatures = {"text" : sentences[i],
+    for i in range(len(validSentences)):
+        sentenceFeatures = {"text" : validSentences[i],
                             "vector" : vectors[i],
                             "positionScore" : positions[i],
                             "lengthScore" : lengths[i],
