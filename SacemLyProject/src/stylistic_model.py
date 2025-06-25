@@ -70,6 +70,11 @@ def StyleVectorText(text, embeddingMatrix, vocab, Keywords, title=""):
 
     vector.append(properties["avg_sentences_per_paragraph"])
 
+    while len(vector) < 9:
+        vector.append(0.0)
+        print("The text is too short, the results may not be accurate")
+
+
 
     return np.array(vector)
 
@@ -92,8 +97,12 @@ def compareTextStyles(text1, text2, embeddingMatrix, vocab, keywords, title=""):
     v1_text = StyleVectorText(text1, embeddingMatrix, vocab, keywords, title)
     v2_text = StyleVectorText(text2, embeddingMatrix, vocab, keywords, title)
 
+
+
     v1_sent = StyleVectorSentence(text1, embeddingMatrix, vocab, keywords, title)
     v2_sent = StyleVectorSentence(text2, embeddingMatrix, vocab, keywords, title)
+
+
 
     def cosine_sim(v1, v2):
         norm1 = np.linalg.norm(v1)
