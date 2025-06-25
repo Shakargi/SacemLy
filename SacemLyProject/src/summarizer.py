@@ -2,6 +2,7 @@ import numpy as np
 import LSA_keywords as lsa
 import importance_model as im
 import preprocessing as pre
+import stylistic_model as sm
 
 
 def summarizer(text, title, embeddingMatrix, numSentences=20):
@@ -9,8 +10,15 @@ def summarizer(text, title, embeddingMatrix, numSentences=20):
     vocab = im.buildVocab(words)
     sentences = im.sentencesSplitter(text)
     keyWords = lsa.keywords(sentences)
-    print(keyWords)
     features = im.extract_features(text, embeddingMatrix, vocab, keyWords, title)
+
+    if not features:
+        return ["[Summary unavailable due to invalid or empty input]"]
+
+    textVector = sm.StyleVectorText(text, embeddingMatrix, vocab, keyWords, title)
+    sentenceVector = sm.StyleVectorSentence(text, embeddingMatrix, vocab, keyWords, title)
+
+    sm.updateStyleProfile(textVector, sentenceVector, len(sentences))
 
     keyWordDensity = [featureOfsentence["keywordDensity"] for featureOfsentence in features]
     similarityToTitle = [featureOfsentence["similarityToTitle"] for featureOfsentence in features]
